@@ -7,5 +7,10 @@ class Tile(pygame.sprite.Sprite):
         super().__init__(groups)
         self.sprite_type = sprite_type
         self.image = surface
-        self.rect = self.image.get_rect(topleft = pos)
+        if sprite_type == "object":
+            # do offset
+            self.rect = self.image.get_rect(topleft = (pos[0], pos[1] - TILESIZE))
+        else:
+            self.rect = self.image.get_rect(topleft = pos)
+            
         self.hitbox  = self.rect.inflate(0, -10) # takes rect and changes size to (x, y) -> "-10" makes rect shrink 5 on either sides
